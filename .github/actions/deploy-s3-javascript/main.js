@@ -6,7 +6,7 @@ function run() {
     core.notice('Hello from my custom Javascription Action!');
 
     // 1) Get the input values
-    const bucket = core.getInput('bucket', { required: true });
+    const bucket = core.getInput('bucket-name', { required: true });
     const bucketRegion = core.getInput('bucket-region', { required: true });
     const distFolder = core.getInput('dist-folder', { required: true });
 
