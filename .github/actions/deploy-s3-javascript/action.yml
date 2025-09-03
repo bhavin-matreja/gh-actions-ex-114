@@ -11,6 +11,10 @@ inputs:
   dist-folder:
     description: 'The folder containing the deployable files'
     required: true
+outputs:
+  website-url:
+    description: 'The URL of the deployed website'
+    #Here we dont set the value: we only register the output and set it from javascript main.js
 runs:
   using: 'node16' #Custom Javascript action using node runtime which is javascript runtime
   main: 'main.js' #Name of the file that should be executed as custom action  

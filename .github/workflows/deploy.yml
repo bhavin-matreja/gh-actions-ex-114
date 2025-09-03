@@ -63,6 +63,7 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy site
+        id: deploy
         uses: ./.github/actions/deploy-s3-javascript
         # Env variables for AWS Auth required only for this step so added step level
         env:
@@ -72,6 +73,9 @@ jobs:
           bucket-name: my-s3-bucket-name
           dist-folder: ./dist
           #bucket-region: ap-south-1
+      - name: Show S3 Website URL
+        run: |
+          echo "Live URL: ${{ steps.deploy.outputs.website-url }}"
   information:
     runs-on: ubuntu-latest
     steps:
