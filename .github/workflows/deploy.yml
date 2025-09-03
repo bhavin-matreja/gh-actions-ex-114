@@ -62,20 +62,21 @@ jobs:
           path: ./dist
       - name: Output contents
         run: ls
-      - name: Deploy site
-        id: deploy
-        uses: ./.github/actions/deploy-s3-javascript
-        # Env variables for AWS Auth required only for this step so added step level
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        with:
-          bucket-name: my-s3-bucket-name
-          dist-folder: ./dist
-          #bucket-region: ap-south-1
-      - name: Show S3 Website URL
-        run: |
-          echo "Live URL: ${{ steps.deploy.outputs.website-url }}"
+      # - name: Deploy site
+      #   id: deploy
+      #   uses: ./.github/actions/deploy-s3-javascript #use custom js action
+      #   uses: ./.github/actions/deploy-s3-docker #use custom docker action
+      #   # Env variables for AWS Auth required only for this step so added step level
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   with:
+      #     bucket-name: my-s3-bucket-name
+      #     dist-folder: ./dist
+      #     #bucket-region: ap-south-1
+      # - name: Show S3 Website URL
+      #   run: |
+      #     echo "Live URL: ${{ steps.deploy.outputs.website-url }}"
   information:
     runs-on: ubuntu-latest
     steps:
