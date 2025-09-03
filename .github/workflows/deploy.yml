@@ -63,11 +63,19 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy site
-        run: echo "Deploying..."
+        uses: ./.github/actions/deploy-s3-javascript
+        # Env variables for AWS Auth required only for this step so added step level
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          bucket-name: my-s3-bucket-name
+          dist-folder: ./dist
+          #bucket-region: ap-south-1
   information:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Run custom javascript action
-        uses: ./.github/actions/deploy-s3-javascript
+      # - name: Run custom javascript action
+      #   uses: ./.github/actions/deploy-s3-javascript
